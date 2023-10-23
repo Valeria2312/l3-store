@@ -4,6 +4,7 @@ import { formatPrice } from '../../utils/helpers';
 import { ProductData } from 'types';
 import html from './productDetail.tpl.html';
 import { cartService } from '../../services/cart.service';
+import {favoriteService} from "../../services/favorite.service";
 
 class ProductDetail extends Component {
   more: ProductList;
@@ -18,9 +19,12 @@ class ProductDetail extends Component {
 
   async render() {
     const urlParams = new URLSearchParams(window.location.search);
+    console.log(urlParams)
     const productId = Number(urlParams.get('id'));
+    console.log(productId)
 
     const productResp = await fetch(`/api/getProduct?id=${productId}`);
+    console.log(productResp)
     this.product = await productResp.json();
 
     if (!this.product) return;
@@ -32,6 +36,7 @@ class ProductDetail extends Component {
     this.view.description.innerText = description;
     this.view.price.innerText = formatPrice(salePriceU);
     this.view.btnBuy.onclick = this._addToCart.bind(this);
+    this.view.btnFav.onclick = this._addToFavorites.bind(this)
 
     const isInCart = await cartService.isInCart(this.product);
 
@@ -57,9 +62,22 @@ class ProductDetail extends Component {
     this._setInCart();
   }
 
+  private _addToFavorites() {
+    // const products =  favoriteService.get()
+    if (!this.product) return;
+
+    favoriteService.addProduct(this.product);
+    this._setInFavorite()
+  }
+
   private _setInCart() {
     this.view.btnBuy.innerText = '✓ В корзине';
     this.view.btnBuy.disabled = true;
+  }
+  private _setInFavorite() {
+    this.view.btnFav.disabled = true;
+    // TODO: Изменять стиль кнопки btnFav
+    // this.view.btnFav.style.backgroundColor = "#cb11ab"
   }
 }
 

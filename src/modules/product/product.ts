@@ -23,7 +23,6 @@ export class Product {
 
   render() {
     const { id, name, src, salePriceU } = this.product;
-
     this.view.root.setAttribute('href', `/product?id=${id}`);
     this.view.img.setAttribute('src', src);
     this.view.title.innerText = name;

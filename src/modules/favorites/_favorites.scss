@@ -1,0 +1,19 @@
+.favorites{
+  &__empty {
+    display: none;
+  }
+  &__cart {
+    display: flex;
+    gap: 10px;
+  }
+  &.is__empty {
+    .favorites__empty {
+      display: block;
+
+    }
+
+    .favorites__in {
+      display: none;
+    }
+  }
+}
