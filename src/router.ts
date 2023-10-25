@@ -3,6 +3,7 @@ import { notFoundComp } from './modules/notFound/notFound';
 import { homepageComp } from './modules/homepage/homepage';
 import { productDetailComp } from './modules/productDetail/productDetail';
 import { checkoutComp } from './modules/checkout/checkout';
+import RouteAPI from "./controllers/route-controllers";
 
 const ROUTES = {
   '/': homepageComp,
@@ -27,7 +28,10 @@ export default class Router {
 
     // @ts-ignore
     const component = ROUTES[window.location.pathname] || notFoundComp;
+    const route: any = {}
 
+    route.url = window.location.pathname
+    RouteAPI.navigatePages(route)
     component.attach(this.$appRoot);
     component.render();
   }
