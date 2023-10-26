@@ -1,0 +1,15 @@
+.searchSuggestions {
+  display: flex;
+  align-items: baseline;
+  font-family: Helvetica, sans-serif;
+
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 550;
+  margin-bottom: 30px;
+  &_1,&_2,&_3 {
+    padding: 4px 6px 8px 6px;
+    border-radius: 8px;
+    background-color: #f6f6fa;
+  }
+}
