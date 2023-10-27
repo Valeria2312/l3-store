@@ -38,3 +38,4 @@ export class SearchSuggestions {
         })
     }
 }
+export const SearchSuggestionsComp = new SearchSuggestions(html);
