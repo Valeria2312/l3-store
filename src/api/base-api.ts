@@ -38,10 +38,13 @@ export class BaseApi {
                     body: JSON.stringify(data)
                 }
             ).catch((error) => {
-               console.log(error);
-            });
+                 throw new Error(error);
+             });
         } catch (error) {
-            console.log(error)
+            if (error instanceof Error) {
+                throw new TypeError(`API Error: ${error.message}`);
+            }
+            throw new Error('Unknown API error');
         }
     }
 
@@ -61,38 +64,37 @@ export class BaseApi {
             throw new Error('Unknown API error');
         }
     }
-
-    // public async put({ data }: { data: RequestData }) {
-    //     try {
-    //         const response = await fetch(
-    //             `${this._baseUrl}`,
-    //             this.getFetchOptions(Method.PUT, data),
-    //         ).catch((error) => {
-    //             throw new Error(error);
-    //         });
-    //         return await this.checkResponse(response).json();
-    //     } catch (error) {
-    //         if (error instanceof Error) {
-    //             throw new TypeError(`API Error: ${error.message}`);
-    //         }
-    //         throw new Error('Unknown API error');
-    //     }
-    // }
-    //
-    // public async delete({ data }: { data: RequestData }) {
-    //     try {
-    //         const response = await fetch(
-    //             `${this._baseUrl}`,
-    //             this.getFetchOptions(Method.DELETE, data),
-    //         ).catch((error) => {
-    //             throw new Error(error);
-    //         });
-    //         return await this.checkResponse(response).json();
-    //     } catch (error) {
-    //         if (error instanceof Error) {
-    //             throw new TypeError(`API Error: ${error.message}`);
-    //         }
-    //         throw new Error('Unknown API error');
-    //     }
-    // }
+//TODO: для других методов
+//     public async put({ data }: { data: RequestData }) {
+//         try {
+//             const response = await fetch(
+//                 `${url}`,
+//                 this.getFetchOptions(Method.PUT, data),
+//             ).catch((error) => {
+//                 throw new Error(error);
+//             });
+//             return await this.checkResponse(response).json();
+//         } catch (error) {
+//             if (error instanceof Error) {
+//                 throw new TypeError(`API Error: ${error.message}`);
+//             }
+//             throw new Error('Unknown API error');
+//         }
+//     }
+//     public async delete({ data }: { data: RequestData }) {
+//         try {
+//             const response = await fetch(
+//                 `${url}`,
+//                 this.getFetchOptions(Method.DELETE, data),
+//             ).catch((error) => {
+//                 throw new Error(error);
+//             });
+//             return await this.checkResponse(response).json();
+//         } catch (error) {
+//             if (error instanceof Error) {
+//                 throw new TypeError(`API Error: ${error.message}`);
+//             }
+//             throw new Error('Unknown API error');
+//         }
+//     }
 }

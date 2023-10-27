@@ -1,19 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c39d71f1-5942-4d75-b1ef-2d4b31352ce0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/api/base-api.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/api/product-api.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/api/route-api.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/controllers/order-controllers.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/controllers/product-controllers.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/controllers/route-controllers.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/checkout/checkout.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/checkout/checkout.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/product/product.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/product/product.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/productDetail/productDetail.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/productDetail/productDetail.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/router.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/router.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/helpers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/helpers.ts" afterDir="false" />
+    <list default="true" id="61ef0857-5f46-42d5-9140-0175b8d36104" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/base-api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/base-api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/order-controllers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/order-controllers.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

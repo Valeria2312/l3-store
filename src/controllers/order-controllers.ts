@@ -16,6 +16,7 @@ class OrderAPI {
         data.timestamp = Date.now()
 
         try {
+            alert(JSON.stringify(data))
             await this.OrderApi.makeOrder(url, data)
         }
         catch (error) {
