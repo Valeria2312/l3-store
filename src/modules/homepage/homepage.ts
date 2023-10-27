@@ -3,15 +3,20 @@ import { Component } from '../component';
 import html from './homepage.tpl.html';
 
 import { ProductList } from '../productList/productList';
+import { SearchSuggestions } from "../searchSuggestions/searchSuggestions";
 
 class Homepage extends Component {
   popularProducts: ProductList;
+  searchSuggestions: SearchSuggestions;
 
   constructor(props: any) {
     super(props);
 
     this.popularProducts = new ProductList();
     this.popularProducts.attach(this.view.popular);
+
+    this.searchSuggestions = new SearchSuggestions()
+    this.searchSuggestions.attach(this.view.searchSuggestions)
   }
 
   render() {
@@ -21,6 +26,7 @@ class Homepage extends Component {
         this.popularProducts.update(products);
       });
 
+    this.searchSuggestions.render()
     const isSuccessOrder = new URLSearchParams(window.location.search).get('isSuccessOrder');
     if (isSuccessOrder != null) {
       const $notify = addElement(this.view.notifies, 'div', { className: 'notify' });
