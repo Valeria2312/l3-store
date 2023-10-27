@@ -3,6 +3,7 @@ import { ProductData } from 'types';
 
 const DB = '__wb-cart';
 
+// работа с дабавлением товара в карзину
 class CartService {
   init() {
     this._updCounters();
