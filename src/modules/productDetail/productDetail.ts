@@ -19,12 +19,9 @@ class ProductDetail extends Component {
 
   async render() {
     const urlParams = new URLSearchParams(window.location.search);
-    console.log(urlParams)
     const productId = Number(urlParams.get('id'));
-    console.log(productId)
 
     const productResp = await fetch(`/api/getProduct?id=${productId}`);
-    console.log(productResp)
     this.product = await productResp.json();
 
     if (!this.product) return;
@@ -35,8 +32,15 @@ class ProductDetail extends Component {
     this.view.title.innerText = name;
     this.view.description.innerText = description;
     this.view.price.innerText = formatPrice(salePriceU);
+    if (await favoriteService.isProductFavorite(this.product)) {
+      this.setFavoriteButton();
+    } else {
+      this.resetFavoriteButton();
+    }
+
+
     this.view.btnBuy.onclick = this._addToCart.bind(this);
-    this.view.btnFav.onclick = this._addToFavorites.bind(this)
+    this.view.btnFav.onclick = this._toggleFavorite.bind(this)
 
     const isInCart = await cartService.isInCart(this.product);
 
@@ -61,23 +65,29 @@ class ProductDetail extends Component {
     cartService.addProduct(this.product);
     this._setInCart();
   }
-
-  private _addToFavorites() {
-    // const products =  favoriteService.get()
-    if (!this.product) return;
-
-    favoriteService.addProduct(this.product);
-    this._setInFavorite()
-  }
-
   private _setInCart() {
     this.view.btnBuy.innerText = '✓ В корзине';
     this.view.btnBuy.disabled = true;
   }
-  private _setInFavorite() {
-    this.view.btnFav.disabled = true;
-    // TODO: Изменять стиль кнопки btnFav
-    // this.view.btnFav.style.backgroundColor = "#cb11ab"
+
+  private async _toggleFavorite() {
+    if (!this.product) return;
+
+    if (await favoriteService.isProductFavorite(this.product)) {
+      await favoriteService.removeProduct(this.product);
+      this.resetFavoriteButton();
+    } else {
+      await favoriteService.addProduct(this.product);
+      this.setFavoriteButton();
+    }
+  }
+
+  private setFavoriteButton() {
+    this.view.btnFav.style.backgroundColor = "#cb11ab";
+  }
+
+  private resetFavoriteButton() {
+    this.view.btnFav.style.backgroundColor = "";
   }
 }
 

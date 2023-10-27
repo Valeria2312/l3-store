@@ -10,14 +10,22 @@ class FavoriteService {
 
     async addProduct(product: ProductData) {
         const products = await this.get();
-console.log(product)
-        await this.set([...products, product]);
-    }
 
+        await this.set([...products, product]);
+
+        if(products.length === 0) {
+            console.log("массив пустой")
+            await this._addFavoritesLink()
+        }
+    }
     async removeProduct(product: ProductData) {
         const products = await this.get();
 
         await this.set(products.filter(({ id }) => id !== product.id));
+        if(products.length === 1) {
+            console.log("в массиве 1")
+            await this._removeFavoritesLink()
+        }
     }
 
     async get(): Promise<ProductData[]> {
@@ -28,18 +36,34 @@ console.log(product)
         console.log(data)
         await localforage.setItem(DB, data);
     }
-
-    private async checkingFavorites () {
+    private _addFavoritesLink () {
+        const container = document.querySelector(".header__buttons");
+        const link = document.createElement('a');
+        link.className = "favorites";
+        link.textContent = "Избранное";
+        link.href = "/favorites";
+        container?.prepend(link);
+    }
+    private _removeFavoritesLink() {
+        const favoritesLink = document.querySelector(".favorites");
+        favoritesLink?.remove();
+    }
+    private async checkingFavorites() {
         const products = await this.get();
-        if(products) {
-            const container = document.querySelector(".header__buttons")
-                // = `<a href="/favorites">Избранное</a>`
-            const link = document.createElement('a');
-            link.textContent = "Избранное";
-            link.href = "/favorites"
-            container?.prepend (link)
+
+        if (products.length >= 1 ) {
+            this._addFavoritesLink()
+        } else {
+            this._removeFavoritesLink()
         }
-        console.log(products)
+    }
+    async isProductFavorite(product: ProductData) {
+        const products = await this.get();
+        return products.some(p => p.id === product.id);
+    }
+    async deleteFull() {
+        await localforage.removeItem(DB)
+        this.checkingFavorites()
     }
 }
 export const favoriteService = new FavoriteService();
